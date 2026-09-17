@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dj402b7qc3e8j"]
+
+[ext_resource type="Script" uid="uid://dgbnmd2iesi7g" path="res://gameplay/components/spawn_point/spawn_point.gd" id="1_dlgrh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlgrh"]
+albedo_color = Color(1, 1, 0.043137256, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6ilv3"]
+material = SubResource("StandardMaterial3D_dlgrh")
+top_radius = 0.0
+height = 1.0
+
+[node name="SpawnPoint" type="MeshInstance3D" unique_id=1047715984]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6ilv3")
+script = ExtResource("1_dlgrh")
+
+[node name="LookAt" type="Marker3D" parent="." unique_id=1195238689]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.1625278, 0)

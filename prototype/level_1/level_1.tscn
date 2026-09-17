@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://mqufeol86snx"]
+
+[ext_resource type="PackedScene" uid="uid://dj402b7qc3e8j" path="res://gameplay/components/spawn_point/spawn_point.tscn" id="1_8wvq7"]
+
+[sub_resource type="GDScript" id="GDScript_miw57"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_itv7y"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_4kiju"]
+sky_material = SubResource("ProceduralSkyMaterial_itv7y")
+
+[sub_resource type="Environment" id="Environment_4bqwy"]
+background_mode = 2
+sky = SubResource("Sky_4kiju")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k22tv"]
+albedo_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+
+[node name="TestLevel" type="Node3D" unique_id=1271615060]
+script = SubResource("GDScript_miw57")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=49150791]
+environment = SubResource("Environment_4bqwy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=190313809]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=2116110198]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2141186791]
+size = Vector3(1000, 0.5, 1000)
+material = SubResource("StandardMaterial3D_k22tv")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1676434594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.3762197, -10)
+size = Vector3(7, 2.2524414, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=80613614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.2499995, 3.2608728)
+size = Vector3(4, 4, 4)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1334387558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5.249999, 11.867108)
+size = Vector3(10, 10, 4)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1458783310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10.250002, 23.692177)
+size = Vector3(20, 20, 4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1344661050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.2500004, 7.48555)
+size = Vector3(4, 2, 4)
+
+[node name="SpawnPoint" parent="." unique_id=1047715984 instance=ExtResource("1_8wvq7")]
+transform = Transform3D(0.999909, 0.013491064, 5.8971317e-10, 0, -4.371139e-08, 1, 0.013491064, -0.999909, -4.370741e-08, 22.210455, 19.606356, 3.0265474)

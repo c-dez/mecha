@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ddw6emsswsilm"]
+
+[ext_resource type="Script" uid="uid://d2gexkqqw8u0f" path="res://gameplay/components/third_person_camera/scripts/camera.gd" id="1_s4r7h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ilk7j"]
+
+[node name="ThirdPersonCamera" type="SpringArm3D" unique_id=635731522]
+shape = SubResource("SphereShape3D_ilk7j")
+spring_length = 5.0
+script = ExtResource("1_s4r7h")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=37161550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75360274, 0)
