@@ -1,12 +1,63 @@
 extends Node3D
-## Clase basica de legs contiene multiplicadores para move_speed,jump_speed y special
 class_name Legs
 
-## 1.5 = +50%
-@export var speed_mult: float = 1.0
-@export var jump_mult : float = 1.0
+
+@export var max_speed: float = 5.0
+@export var acceleration: float = 10.0
+@export var deceleration: float = 8.0
+
+var player: Player
 
 
-func special_ability():
-    print('legs special activated')
-    pass
+func _ready() -> void:
+    if not owner is Player:
+        return
+
+    player = owner
+
+func _physics_process(delta: float) -> void:
+    move(delta)
+    
+
+func move(delta: float) -> void:
+    # var input := player.get_player_input()
+    var input := Input.get_vector("left", "right", "up", "down")
+    #NO MOVERSE EN AIRE
+    if not player.is_on_floor():
+        return
+        
+    var direction := (player.transform.basis) * Vector3(
+        input.x, 0.0, input.y
+    )
+
+    if direction.length() > 0.0:
+        direction = direction.normalized()
+
+        var target_velocity := direction * max_speed
+
+        player.velocity.x = move_toward(
+            player.velocity.x,
+            target_velocity.x,
+            acceleration * delta
+        )
+
+        player.velocity.z = move_toward(
+            player.velocity.z,
+            target_velocity.z,
+            acceleration * delta
+        )
+
+    else:
+        player.velocity.x = move_toward(
+            player.velocity.x,
+            0.0,
+            deceleration * delta
+        )
+
+        player.velocity.z = move_toward(
+            player.velocity.z,
+            0.0,
+            deceleration * delta
+        )
+
+    player.move_and_slide()

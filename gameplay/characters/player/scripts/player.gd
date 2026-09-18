@@ -24,10 +24,6 @@ var current_health: int
 @export var gamepad_sens_h: float = 3
 @export var gamepad_sens_v: float = 2
 
-# addons multipliers
-var speed_mult:float
-var jump_mult:float
-var special
 
 
 func _ready() -> void:
@@ -38,18 +34,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
     _gravity(delta)
-    move()
     jump("a_button")
     move_and_slide()
-    
-
-#----
-func move() -> void:
-    var input := Input.get_vector("left", "right", "up", "down")
-    var direction := (transform.basis * Vector3(input.x, 0, input.y)).normalized()
-
-    velocity.x = direction.x * (move_speed * speed_mult)
-    velocity.z = direction.z * (move_speed * speed_mult)
 
 
 func jump(button_name: String) -> void:
@@ -72,13 +58,3 @@ func _calculate_gravity() -> void:
     _jump_gravity = 2.0 * jump_height / (jump_time_to_peak * jump_time_to_peak)
     _jump_fall_gravity = 2.0 * jump_height / (jump_time_to_descend * jump_time_to_descend)
 
-func legs():
-    pass
-
-func backpack():
-    pass
-
-func weapon():
-    pass
-# func addons():
-    # pass
