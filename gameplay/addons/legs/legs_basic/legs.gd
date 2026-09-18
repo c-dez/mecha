@@ -26,15 +26,8 @@ var is_bosting: bool = false
 
 # var jump_button:String
 func _ready() -> void:
-    if not owner is Player:
-        return
-
-    player = owner
-
-    var backpack = get_parent().get_node('BackPack')
-    backpack.connect('is_bosting', _on_is_bosting)
-
-
+    set_player()
+    set_signals()
 
 
 func _physics_process(delta: float) -> void:
@@ -89,6 +82,30 @@ func move(delta: float) -> void:
             deceleration * delta
         )
 
-
+## true cuando back pack esta en bosting(dash)
 func _on_is_bosting(value) -> void:
     is_bosting = value
+
+
+func set_player() -> void:
+    if not owner is Player:
+        return
+
+    player = owner
+
+## Intencion: pueda usar signals universales en este caso de backpak (por que necesito saber cuando esta activado para bloquear movimiento en este script), y que se encargue de asignar los signals en signals_arr
+func set_signals() -> void:
+    #
+    var addons: Node3D = get_parent()
+    var signal_str: String
+    for child in addons.get_children():
+        if child is BackPack:
+            var signals_arr = child.signals_arr
+            for i in range(signals_arr.size()):
+                signal_str = signals_arr[i]
+
+            match signal_str:
+                'is_bosting':
+                    child.connect(signal_str, _on_is_bosting)
+                _:
+                    printerr('signal desconocido')
