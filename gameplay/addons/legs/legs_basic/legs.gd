@@ -12,13 +12,15 @@ class_name Legs
     ## jump_multiplier
 
 
-@export var max_speed: float = 5.0
-@export var acceleration: float = 10.0
-@export var deceleration: float = 8.0
+@export var max_speed: float = 15
+@export var acceleration: float = 20.0
+@export var deceleration: float = 50.0
 
-@export var jump_mult: float = 1.0
+@export var jump_mult: float = 1.5
 
 var player: Player
+
+var is_bosting: bool = false
 
 # var jump_button:String
 func _ready() -> void:
@@ -26,10 +28,17 @@ func _ready() -> void:
         return
 
     player = owner
-    # jump_button = player.actions['jump']
+
+    var backpack = get_parent().get_node('BackPack')
+    backpack.connect('is_bosting', _on_is_bosting)
+
+
+
 
 func _physics_process(delta: float) -> void:
-    move(delta)
+    if not is_bosting:
+        move(delta)
+
     jump(player.actions['jump'])
     
 
@@ -40,9 +49,9 @@ func jump(action_button: String) -> void:
 
 
 func move(delta: float) -> void:
-    var input := Input.get_vector("left", "right", "up", "down")
+    # var input := Input.get_vector("left", "right", "up", "down")
     #NO MOVERSE EN AIRE
-    # var input := player.input
+    var input := player.input
     if not player.is_on_floor():
         return
     var direction := (player.transform.basis) * Vector3(
@@ -78,3 +87,7 @@ func move(delta: float) -> void:
             0.0,
             deceleration * delta
         )
+
+
+func _on_is_bosting(value) -> void:
+    is_bosting = value

@@ -8,7 +8,7 @@ class_name Player
 
 var actions:Dictionary = {
     'jump':'a_button',
-    'back_pack':'b_button'
+    'back_pack':'L2_button'
 }
 
 var input:=Vector2.ZERO
