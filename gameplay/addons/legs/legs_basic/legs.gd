@@ -11,6 +11,8 @@ class_name Legs
     ## decelaration,
     ## jump_multiplier
 
+#   DESCRIPCION PIERNAS: piernas ligeras que permiten moverse y cambiar rapidamente de direccion, funcionan bien con bosters cortos en tierra, pueden saltar una moderada distancia
+
 
 @export var max_speed: float = 15
 @export var acceleration: float = 20.0

@@ -2,6 +2,11 @@ extends Node3D
 class_name BackPack
 
 ## Back pack basic -> b_button impulso dependiendo direccion de movimiento
+
+
+# DESCRIPCION: BackPack con bosters de poca duracion, a pesar de esto, son lo suficientemente fuertes para  permitir cambios bruscos de direccion, pueden usarse en el aire pero no permiten mantenerse elevado
+
+
 @export var max_speed: float = 20.0
 @export var acceleration = 100.0
 @export var decelaration: float = 100.0
