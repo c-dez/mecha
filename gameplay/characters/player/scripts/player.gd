@@ -2,9 +2,16 @@ extends CharacterBody3D
 
 class_name Player
 
+##Descripcion
+##
+##sss
+
 var actions:Dictionary = {
-    'jump':'a_button'
+    'jump':'a_button',
+    'back_pack':'b_button'
 }
+
+var input:=Vector2.ZERO
 
 # jump _gravity
 @export var jump_height: float = 2.0
@@ -25,12 +32,16 @@ var current_health: int
 @export var gamepad_sens_h: float = 3
 @export var gamepad_sens_v: float = 2
 
-
 func _ready() -> void:
     current_health = max_health
     _calculate_gravity()
+   
 
 
+func _process(_delta: float) -> void:
+    input = Input.get_vector("left", "right", "up", "down")
+
+    
 func _physics_process(delta: float) -> void:
     _gravity(delta)
     move_and_slide()

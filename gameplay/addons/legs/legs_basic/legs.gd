@@ -1,25 +1,36 @@
 extends Node3D
 class_name Legs
 
+## Clase base para Legs, se encarga de movimiento/ saltar
+## 
+## acceleration / decelaration - entre mayor el valor mayor el efecto
+## 
+## Propiedades:
+    ## max_speed,
+    ## acceleration,
+    ## decelaration,
+    ## jump_multiplier
+
 
 @export var max_speed: float = 5.0
 @export var acceleration: float = 10.0
 @export var deceleration: float = 8.0
+
 @export var jump_mult: float = 1.0
 
 var player: Player
 
-var jump_button:String
+# var jump_button:String
 func _ready() -> void:
     if not owner is Player:
         return
 
     player = owner
-    jump_button = player.actions['jump']
+    # jump_button = player.actions['jump']
 
 func _physics_process(delta: float) -> void:
     move(delta)
-    jump(jump_button)
+    jump(player.actions['jump'])
     
 
 func jump(action_button: String) -> void:
@@ -29,12 +40,11 @@ func jump(action_button: String) -> void:
 
 
 func move(delta: float) -> void:
-    # var input := player.get_player_input()
     var input := Input.get_vector("left", "right", "up", "down")
     #NO MOVERSE EN AIRE
+    # var input := player.input
     if not player.is_on_floor():
         return
-        
     var direction := (player.transform.basis) * Vector3(
         input.x, 0.0, input.y
     )

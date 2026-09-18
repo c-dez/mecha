@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bx32u4wfdojdn"]
 
-[ext_resource type="Script" uid="uid://xsa7m0imgh56" path="res://gameplay/addons/legs/leg_basic/legs.gd" id="1_cssqu"]
+[ext_resource type="Script" uid="uid://xsa7m0imgh56" path="res://gameplay/addons/legs/legs_basic/legs.gd" id="1_cssqu"]
 
 [node name="LegsBasic" type="Node3D" unique_id=1921372647]
 script = ExtResource("1_cssqu")
