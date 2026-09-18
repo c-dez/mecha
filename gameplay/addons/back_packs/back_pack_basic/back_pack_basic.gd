@@ -22,6 +22,9 @@ var player: Player
 var last_direction := Vector3.ZERO
 
 signal is_bosting(value: bool)
+var signals_arr:Array = [
+    'is_bosting'
+]
 
 
 func _ready() -> void:
