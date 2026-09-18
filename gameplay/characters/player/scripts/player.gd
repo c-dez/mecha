@@ -5,13 +5,13 @@ class_name Player
 ##Descripcion
 ##
 ##sss
-
-var actions:Dictionary = {
-    'jump':'a_button',
-    'back_pack':'L2_button'
+@export var leg_stats: LegStats
+var actions: Dictionary = {
+    'jump': 'a_button',
+    'back_pack': 'L2_button'
 }
 
-var input:=Vector2.ZERO
+var input := Vector2.ZERO
 
 # jump _gravity
 @export var jump_height: float = 2.0
@@ -35,9 +35,8 @@ var current_health: int
 func _ready() -> void:
     current_health = max_health
     _calculate_gravity()
-   
 
-
+    
 func _process(_delta: float) -> void:
     input = Input.get_vector("left", "right", "up", "down")
 
@@ -47,7 +46,8 @@ func _physics_process(delta: float) -> void:
     move_and_slide()
 
 
-#--private--
+
+
 func _gravity(delta: float) -> void:
     if not is_on_floor():
         if velocity.y < 0.0:
