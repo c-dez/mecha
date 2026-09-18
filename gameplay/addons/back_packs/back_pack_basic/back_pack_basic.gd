@@ -27,6 +27,7 @@ signal is_bosting(value: bool)
 func _ready() -> void:
     if not owner is Player:
         return
+        
     player = owner
     bost_timer.connect('timeout', _on_bost_timeout)
 
@@ -46,11 +47,22 @@ func _physics_process(delta: float) -> void:
             last_direction = direction
 
 
-        # if input == Vector2.ZERO:
-        #     # back dash
-        #     pass
+    # back bost(dash)
+    if bost_timer.time_left > 0.0 and input == Vector2.ZERO:
+        var target_velocity := (player.transform.basis) * Vector3(
+        0.0, 0.0, 1.0) * max_speed
 
-
+        player.velocity.x = move_toward(
+            player.velocity.x,
+            target_velocity.x,
+            acceleration * delta
+        )
+        player.velocity.z = move_toward(
+            player.velocity.z,
+            target_velocity.z,
+            acceleration * delta
+        )
+    # direction bost(dash)
     if bost_timer.time_left > 0.0 and direction.length() > 0.0:
         var target_velocity := last_direction * max_speed
 
@@ -66,6 +78,7 @@ func _physics_process(delta: float) -> void:
             acceleration * delta
 
         )
+    # recovery
     if recovery_timer.time_left > 0.0:
         player.velocity.x = move_toward(
             player.velocity.x,
