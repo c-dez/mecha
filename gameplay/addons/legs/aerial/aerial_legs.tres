@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="LegStats" format=3 uid="uid://dklnne67q0oex"]
 
-[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/addons/legs/legs_basic/stats.gd" id="1_758dg"]
+[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/addons/legs/legs_basic/resource_script/leg_stats_script.gd" id="1_lppfi"]
 
 [resource]
-resource_local_to_scene = true
-script = ExtResource("1_758dg")
+script = ExtResource("1_lppfi")
+type = 1
 acceleration = 10.0
 deceleration = 20.0
 jump_mult = 2.0
-type = 1
+cool_down = 2.0
 metadata/_custom_type_script = "uid://d5lyfxdphgae"

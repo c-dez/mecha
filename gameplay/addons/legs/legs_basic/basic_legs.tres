@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LegStats" format=3 uid="uid://bowfpn000nd2f"]
 
-[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/addons/legs/legs_basic/stats.gd" id="1_mj22t"]
+[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/addons/legs/legs_basic/resource_script/leg_stats_script.gd" id="1_mj22t"]
 
 [resource]
 resource_local_to_scene = true
