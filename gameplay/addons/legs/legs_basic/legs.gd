@@ -51,11 +51,10 @@ func jump(action_button: String) -> void:
 
 
 func move(delta: float) -> void:
-    # var input := Input.get_vector("left", "right", "up", "down")
-    #NO MOVERSE EN AIRE
     var input := player.input
-    if not player.is_on_floor():
-        return
+    # NO MOVERSE EN AIRE
+    # if not player.is_on_floor():
+    #     return
     var direction := (player.transform.basis) * Vector3(
         input.x, 0.0, input.y
     )

@@ -12,11 +12,12 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nvxhs"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilk7j"]
-albedo_color = Color(1, 0.05490196, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_utgjw"]
+albedo_color = Color(1, 0.4392157, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ax26v"]
-material = SubResource("StandardMaterial3D_ilk7j")
+[sub_resource type="PrismMesh" id="PrismMesh_y3jou"]
+material = SubResource("StandardMaterial3D_utgjw")
+size = Vector3(0.5, 0.5, 0.1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvxji"]
 
@@ -32,9 +33,13 @@ debug_color = Color(0.17453307, 0.64097255, 0.17136633, 0.41960785)
 mesh = SubResource("CapsuleMesh_nvxhs")
 script = ExtResource("2_mdh6u")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin" unique_id=2047170178]
-transform = Transform3D(1, 0, 0, 0, 0.4961679, 0, 0, 0, 0.57792467, 0, 0.3423822, -0.48542023)
-mesh = SubResource("BoxMesh_ax26v")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Skin" unique_id=982730594]
+transform = Transform3D(0.70710677, 0.35084367, 0, -0.70710677, 0.35084367, 0, 0, 0, 0.57792467, 0.411408, 0.8922117, -0.033794433)
+mesh = SubResource("PrismMesh_y3jou")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Skin" unique_id=207558026]
+transform = Transform3D(0.70710665, -0.35084367, 0, 0.70710677, 0.3508436, 0, 0, 0, 0.57792467, -0.43004978, 0.8922117, -0.033794433)
+mesh = SubResource("PrismMesh_y3jou")
 
 [node name="ThirdPersonCamera" parent="." unique_id=635731522 instance=ExtResource("2_ilk7j")]
 transform = Transform3D(1, 0, 0, 0, 0.87077665, 0.49167904, 0, -0.49167904, 0.87077665, 0, 1.7026234, 0)
@@ -58,3 +63,4 @@ debug_color = Color(0.17453307, 0.64097255, 0.17136633, 0.41960785)
 [node name="BackPack" parent="Addons" unique_id=140502472 instance=ExtResource("6_1fpwa")]
 
 [node name="LegsBasic" parent="Addons" unique_id=1921372647 instance=ExtResource("7_t5n0w")]
+acceleration = 50.0

@@ -27,7 +27,7 @@ signal is_bosting(value: bool)
 func _ready() -> void:
     if not owner is Player:
         return
-        
+
     player = owner
     bost_timer.connect('timeout', _on_bost_timeout)
 
@@ -45,7 +45,6 @@ func _physics_process(delta: float) -> void:
             bost_timer.start(bost_time)
             is_bosting.emit(true)
             last_direction = direction
-
 
     # back bost(dash)
     if bost_timer.time_left > 0.0 and input == Vector2.ZERO:
