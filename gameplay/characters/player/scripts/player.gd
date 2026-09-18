@@ -2,8 +2,9 @@ extends CharacterBody3D
 
 class_name Player
 
-@export_category('Movement')
-@export var move_speed: float = 10.0
+var actions:Dictionary = {
+    'jump':'a_button'
+}
 
 # jump _gravity
 @export var jump_height: float = 2.0
@@ -25,23 +26,14 @@ var current_health: int
 @export var gamepad_sens_v: float = 2
 
 
-
 func _ready() -> void:
     current_health = max_health
     _calculate_gravity()
-    pass
 
 
 func _physics_process(delta: float) -> void:
     _gravity(delta)
-    jump("a_button")
     move_and_slide()
-
-
-func jump(button_name: String) -> void:
-    if is_on_floor():
-        if Input.is_action_just_pressed(button_name):
-            velocity.y = _jump_velocity
 
 
 #--private--
@@ -57,4 +49,3 @@ func _calculate_gravity() -> void:
     _jump_velocity = 2.0 * jump_height / jump_time_to_peak
     _jump_gravity = 2.0 * jump_height / (jump_time_to_peak * jump_time_to_peak)
     _jump_fall_gravity = 2.0 * jump_height / (jump_time_to_descend * jump_time_to_descend)
-
