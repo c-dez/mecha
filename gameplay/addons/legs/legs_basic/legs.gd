@@ -147,7 +147,7 @@ func set_signals() -> void:
                 'is_bosting':
                     child.connect(signal_str, _on_is_bosting)
                 _:
-                    printerr('signal desconocido')
+                    printerr('signal desconocido: ', signal_str)
 
 
 func set_stats()->void:
@@ -159,6 +159,7 @@ func set_stats()->void:
     cool_down = leg_stats.cool_down
 
     current_air_jumps = max_air_jumps
+
     match leg_stats.type:
         leg_stats.TYPE.basic:
             type = TYPE.basic
@@ -168,8 +169,6 @@ func set_stats()->void:
         _:
             pass
 
-    if type == TYPE.aerial:
-        can_air_jump = true
-    else:
-        can_air_jump = false
+
+    can_air_jump = true if type == TYPE.aerial else false
     
