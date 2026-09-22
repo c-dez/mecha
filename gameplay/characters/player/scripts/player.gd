@@ -2,15 +2,16 @@ extends CharacterBody3D
 
 class_name Player
 
-##Descripcion
-##
-##sss
+## Player
+
+
+## Recurso con los stats que legs utiliza, nodo Addons/Legs lee estos valores y decide su comportamiento
 @export var leg_stats: LegStats
 var actions: Dictionary = {
     'jump': 'a_button',
     'back_pack': 'L2_button'
 }
-
+## Player input
 var input := Vector2.ZERO
 
 # jump _gravity
