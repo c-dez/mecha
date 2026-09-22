@@ -6,6 +6,9 @@ class_name Legs
 ##
 ##
 
+# FUNCIONAMIENTO:
+    #
+
 var player: Player
 var leg_stats: LegStats
 # Campos internos, lee los valores de leg_stats:LegStats
@@ -23,7 +26,7 @@ var _cool_down: float = 0.0
 var _cd: float = 0.0
 # -------------------------------
 
-## Controlado por signal _on_is_bosting
+## Controlado por signal _on_is_bosting, indica si el special esta activo
 var is_on_back_pack_special: bool = false
 ## si _max_iar_jumps > 0 true
 var can_air_jump: bool = false

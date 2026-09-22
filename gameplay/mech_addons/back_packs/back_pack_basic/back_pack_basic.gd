@@ -2,12 +2,16 @@ extends Node3D
 class_name BackPack
 
 
-
-
-## DESCRIPCION: activate_special(callable) llama a la funcion que quiero que se active,
-## que se mantiene activo durante special_duration /segundos,
+## DESCRIPCION: activate_special(callable) llama a la funcion que quiero que se active como special,
+##special se mantiene activo durante special_duration /segundos,
 ## pensado asi para al heredar de esta clase solo tenga que override el _physics_process() 
 ## con activate_special() deseado
+
+# FUNCIONAMIENTO:
+    # Este nodo al iniciar callable de activate_special(),
+    # empieza special_duration_timer,
+    # mientras dura special esta activado
+
 
 
 var _max_speed: float = 40.0
