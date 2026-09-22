@@ -1,10 +1,11 @@
 extends Node3D
 class_name Legs
 
-## Clase Basica Legs
 
+## DESCRIPCION :
+##
+##
 
-# DESCRIPCION PIERNAS: piernas ligeras que permiten moverse y cambiar rapidamente de direccion, funcionan bien con bosters cortos en tierra, pueden saltar una moderada distancia
 var player: Player
 var leg_stats: LegStats
 # Campos internos, lee los valores de leg_stats:LegStats
