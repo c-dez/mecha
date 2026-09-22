@@ -22,7 +22,7 @@ var _cool_down: float = 0.0
 var _cd: float = 0.0
 # -------------------------------
 ## Controlado por signal _on_is_bosting
-var is_bosting: bool = false
+var is_on_back_pack_special: bool = false
 ## si _max_iar_jumps > 0 true
 var can_air_jump: bool = false
 ## Da seguimiento en runtime de cuantos saltos en el aire puede hacer
@@ -59,6 +59,7 @@ func air_jump(action_button: String):
 			current_air_jumps -= 1
 			player.velocity.y = player._jump_velocity * _jump_mult
 
+
 ## cooldownde air_jump( por ahora, quiero que controle la habilidad especial )
 func recharge_cool_down(delta: float) -> void:
 	if not can_air_jump:
@@ -72,8 +73,8 @@ func recharge_cool_down(delta: float) -> void:
 
 
 func move(delta: float) -> void:
-	# no moverse al is_bosting(signal de backPack)
-	if is_bosting:
+	# no moverse al is_on_back_pack_special(signal de backPack)
+	if is_on_back_pack_special:
 		return
 
 	# NO MOVERSE EN AIRE
@@ -116,8 +117,8 @@ func move(delta: float) -> void:
 
 
 ## Signal desde backPack, usada para bloquear el mivimiento while true
-func _on_is_bosting(value) -> void:
-	is_bosting = value
+func _on_back_pack_special_state(value) -> void:
+	is_on_back_pack_special = value
 
 
 func set_player() -> void:
@@ -130,19 +131,10 @@ func set_player() -> void:
 
 ## Intencion: pueda usar signals universales en este caso de backpak (por que necesito saber cuando esta activado para bloquear movimiento en este script), y que se encargue de asignar los signals en signals_arr
 func set_signals() -> void:
-	var addons: Node3D = get_parent()
-	var signal_str: String
-	for child in addons.get_children():
+	var mech_addons: Node3D = get_parent()
+	for child in mech_addons.get_children():
 		if child is BackPack:
-			var signals_arr = child.signals_arr
-			for i in range(signals_arr.size()):
-				signal_str = signals_arr[i]
-
-			match signal_str:
-				'is_bosting':
-					child.connect(signal_str, _on_is_bosting)
-				_:
-					printerr('signal desconocido: ', signal_str)
+			child.connect('back_pack_special_state_signal',_on_back_pack_special_state)
 					
 
 ## Referencia Resource LegStats de player en campo leg_stats , para usarlos en campos privados
