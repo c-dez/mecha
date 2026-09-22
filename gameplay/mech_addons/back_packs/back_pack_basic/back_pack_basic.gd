@@ -12,8 +12,8 @@ class_name BackPack
 @export var decelaration: float = 100.0
 var input: Vector2
 var player: Player
-
-@onready var bost_timer: Timer = $Timer
+# instanciar nodos en script
+@onready var bost_timer: Timer = $BostTimer
 @export var bost_time: float = 0.5
 
 @onready var recovery_timer: Timer = $RecoveryTimer
@@ -38,6 +38,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+    # encapsular 
     input = player.input
     var direction := (player.transform.basis) * Vector3(
         input.x, 0.0, input.y
@@ -100,3 +101,5 @@ func _on_bost_timeout() -> void:
 
 func _on_recovery_timer_timeout() -> void:
     is_bosting.emit(false)
+
+

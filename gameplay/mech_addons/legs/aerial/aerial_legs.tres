@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LegStats" format=3 uid="uid://dklnne67q0oex"]
 
-[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/addons/legs/legs_basic/resource_script/leg_stats_script.gd" id="1_lppfi"]
+[ext_resource type="Script" uid="uid://d5lyfxdphgae" path="res://gameplay/mech_addons/legs/legs_basic/resource_script/leg_stats_script.gd" id="1_lppfi"]
 
 [resource]
 script = ExtResource("1_lppfi")
