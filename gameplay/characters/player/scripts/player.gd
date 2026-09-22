@@ -7,6 +7,7 @@ class_name Player
 
 ## Recurso con los stats que legs utiliza, nodo Addons/Legs lee estos valores y decide su comportamiento
 @export var leg_stats: LegStats
+@export var back_pack_stats:BackPackStats
 var actions: Dictionary = {
     'jump': 'a_button',
     'back_pack': 'L2_button'
