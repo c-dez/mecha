@@ -73,7 +73,7 @@ func recharge_cool_down(delta: float) -> void:
 
 func move(delta: float) -> void:
     # no moverse al is_bosting(signal de backPack)
-    if not is_bosting:
+    if is_bosting:
         return
 
     # NO MOVERSE EN AIRE
@@ -147,11 +147,11 @@ func set_signals() -> void:
 
 ## Referencia Resource LegStats de player en campo leg_stats , para usarlos en campos privados
 func set_stats() -> void:
+    leg_stats = player.leg_stats
     if not leg_stats is LegStats:
         printerr('LegStats is not LegStats')
         return
 
-    leg_stats = player.leg_stats
 
     _max_speed = leg_stats.max_speed
     _acceleration = leg_stats.acceleration
