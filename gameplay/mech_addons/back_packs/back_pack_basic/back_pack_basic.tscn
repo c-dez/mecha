@@ -5,8 +5,8 @@
 [node name="BackPack" type="Node3D" unique_id=140502472]
 script = ExtResource("1_0ubm3")
 
-[node name="BostTimer" type="Timer" parent="." unique_id=627910164]
+[node name="SpecialDurationTimer" type="Timer" parent="." unique_id=627910164]
 one_shot = true
 
-[node name="RecoveryTimer" type="Timer" parent="." unique_id=2094272829]
+[node name="SpecialRecoveryTimer" type="Timer" parent="." unique_id=2094272829]
 one_shot = true

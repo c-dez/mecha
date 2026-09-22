@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bxyqbd7jvf62i" path="res://gameplay/components/hurtbox/hurtbox.gd" id="4_lvxji"]
 [ext_resource type="Script" uid="uid://ds8og5vvjvr3m" path="res://gameplay/characters/player/scripts/health.gd" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://dg5jlouc20yfn" path="res://gameplay/mech_addons/back_packs/back_pack_basic/back_pack_basic.tscn" id="6_1fpwa"]
-[ext_resource type="Script" uid="uid://xsa7m0imgh56" path="res://gameplay/mech_addons/legs/legs_basic/legs.gd" id="8_nra0a"]
+[ext_resource type="PackedScene" uid="uid://bx32u4wfdojdn" path="res://gameplay/mech_addons/legs/legs_basic/legs_basic.tscn" id="8_t5n0w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uhly"]
 
@@ -65,5 +65,4 @@ metadata/_edit_lock_ = true
 
 [node name="BackPack" parent="Addons" unique_id=140502472 instance=ExtResource("6_1fpwa")]
 
-[node name="Legs" type="Node3D" parent="Addons" unique_id=130455528]
-script = ExtResource("8_nra0a")
+[node name="LegsBasic" parent="Addons" unique_id=1921372647 instance=ExtResource("8_t5n0w")]
