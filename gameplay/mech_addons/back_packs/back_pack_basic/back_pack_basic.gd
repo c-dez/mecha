@@ -13,9 +13,9 @@ class_name BackPack
     # mientras dura special esta activado
 
 
-
+var stats:BackPackStats
 var _max_speed: float = 40.0
-var _acceleration = 300.0
+var _acceleration = 100.0
 var _decelaration: float = 100.0
 
 ## special durartion
@@ -37,10 +37,10 @@ var last_direction := Vector3.ZERO
 signal back_pack_special_state_signal(value: bool)
 
 
-
 func _ready() -> void:
     set_player()
     set_timers_signals()
+    set_stats()
 
 
 func _physics_process(delta: float) -> void:
@@ -60,6 +60,17 @@ func set_player() -> void:
         return
 
     player = owner
+
+func set_stats() -> void:
+    stats = player.back_pack_stats
+
+    _max_speed = stats.max_speed
+    _acceleration = stats.acceleration
+    _decelaration = stats.decelaration
+
+    _special_duration = stats.special_duration
+    _special_recovery = stats.special_recovery
+
 
 
 ## Toma player.input y regresa su direccion en Vector3
