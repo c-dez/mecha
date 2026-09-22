@@ -7,23 +7,28 @@ class_name BackPack
 # DESCRIPCION: BackPack con bosters de poca duracion, a pesar de esto, son lo suficientemente fuertes para  permitir cambios bruscos de direccion, pueden usarse en el aire pero no permiten mantenerse elevado
 
 
-@export var max_speed: float = 20.0
-@export var acceleration = 100.0
-@export var decelaration: float = 100.0
+var _max_speed: float = 20.0
+var _acceleration = 100.0
+var _decelaration: float = 100.0
+
+## special durartion
+var _special_duration: float = 0.5
+## Special recovery time
+var _special_recovery: float = 0.1
+
+## Nodo Timer 
+@onready var special_duration_timer: Timer = $SpecialDurationTimer
+
+## Nodo Timer
+@onready var special_recovery_timer: Timer = $SpecialRecoveryTimer
 var input: Vector2
 var player: Player
-# instanciar nodos en script
-@onready var special_duration_timer: Timer = $SpecialDurationTimer
-@export var bost_time: float = 0.5
-
-@onready var special_recovery_timer: Timer = $SpecialRecoveryTimer
-@export var recovery_time: float = 0.1
 
 var last_direction := Vector3.ZERO
-
-signal is_bosting(value: bool)
-var signals_arr:Array = [
-    'is_bosting'
+## true si esta activado
+signal special_state_signal(value: bool)
+var signals_arr: Array = [
+    'special_state_signal',
 ]
 
 
@@ -35,47 +40,73 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-    # encapsular 
+    if Input.is_action_just_pressed(player.actions['back_pack']):
+        dash_bost(get_direction(), delta)
+
+
+
+
+func _on_bost_timeout() -> void:
+    special_recovery_timer.start(_special_recovery)
+
+
+func _on_recovery_timer_timeout() -> void:
+    special_state_signal.emit(false)
+
+
+func set_player() -> void:
+    if not owner is Player:
+        return
+
+    player = owner
+
+
+## Toma player.input y regresa su direccion en Vector3
+func get_direction() -> Vector3:
     input = player.input
     var direction := (player.transform.basis) * Vector3(
         input.x, 0.0, input.y
     ).normalized()
 
-    if Input.is_action_just_pressed(player.actions['back_pack']):
-        if special_duration_timer.is_stopped():
-            special_duration_timer.start(bost_time)
-            is_bosting.emit(true)
-            last_direction = direction
+    return direction
+
+## Incrementa la velocidad de movimiento durante x tiempo, e impide cambiar de direccion
+func dash_bost(direction: Vector3, delta: float) -> void:
+    # if Input.is_action_just_pressed(player.actions['back_pack']):
+    if special_duration_timer.is_stopped():
+        special_duration_timer.start(_special_duration)
+        special_state_signal.emit(true)
+        last_direction = direction
 
     # back bost(dash)
     if special_duration_timer.time_left > 0.0 and input == Vector2.ZERO:
         var target_velocity := (player.transform.basis) * Vector3(
-        0.0, 0.0, 1.0) * max_speed
+        0.0, 0.0, 1.0) * _max_speed
 
         player.velocity.x = move_toward(
             player.velocity.x,
             target_velocity.x,
-            acceleration * delta
+            _acceleration * delta
         )
         player.velocity.z = move_toward(
             player.velocity.z,
             target_velocity.z,
-            acceleration * delta
+            _acceleration * delta
         )
     # direction bost(dash)
     if special_duration_timer.time_left > 0.0 and direction.length() > 0.0:
-        var target_velocity := last_direction * max_speed
+        var target_velocity := last_direction * _max_speed
 
         player.velocity.x = move_toward(
             player.velocity.x,
             target_velocity.x,
-            acceleration * delta
+            _acceleration * delta
 
         )
         player.velocity.z = move_toward(
             player.velocity.z,
             target_velocity.z,
-            acceleration * delta
+            _acceleration * delta
 
         )
     # recovery
@@ -83,25 +114,10 @@ func _physics_process(delta: float) -> void:
         player.velocity.x = move_toward(
             player.velocity.x,
             0.0,
-            decelaration * delta
+            _decelaration * delta
         )
         player.velocity.z = move_toward(
             player.velocity.z,
             0.0,
-            decelaration * delta
+            _decelaration * delta
         )
-
-
-func _on_bost_timeout() -> void:
-    special_recovery_timer.start(recovery_time)
-
-
-func _on_recovery_timer_timeout() -> void:
-    is_bosting.emit(false)
-
-
-func set_player()->void:
-    if not owner is Player:
-        return
-
-    player = owner
