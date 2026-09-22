@@ -4,11 +4,11 @@ class_name BackPack
 ## Back pack basic -> b_button impulso dependiendo direccion de movimiento
 
 
-# DESCRIPCION: BackPack con bosters de poca duracion, a pesar de esto, son lo suficientemente fuertes para  permitir cambios bruscos de direccion, pueden usarse en el aire pero no permiten mantenerse elevado
+# DESCRIPCION: activate_special(callable) llama a la funcion que quiero que se active, que se mantiene activo durante special_duration /segundos, 
 
 
-var _max_speed: float = 20.0
-var _acceleration = 100.0
+var _max_speed: float = 40.0
+var _acceleration = 300.0
 var _decelaration: float = 100.0
 
 ## special durartion
@@ -25,33 +25,27 @@ var input: Vector2
 var player: Player
 
 var last_direction := Vector3.ZERO
-## true si esta activado
-signal special_state_signal(value: bool)
-var signals_arr: Array = [
-    'special_state_signal',
-]
+
+## Signal desde back_pack_basic.gd para mostrar si esta en uso special(bool)
+signal back_pack_special_state_signal(value: bool)
+
 
 
 func _ready() -> void:
     set_player()
-    special_duration_timer.connect('timeout', _on_bost_timeout)
-
-    special_recovery_timer.connect('timeout', _on_recovery_timer_timeout)
+    set_timers_signals()
 
 
 func _physics_process(delta: float) -> void:
-    if Input.is_action_just_pressed(player.actions['back_pack']):
-        dash_bost(get_direction(), delta)
+    activate_special(dash_bost.bind(delta))
 
 
-
-
-func _on_bost_timeout() -> void:
+func _on_special_duration_timeout() -> void:
     special_recovery_timer.start(_special_recovery)
 
 
-func _on_recovery_timer_timeout() -> void:
-    special_state_signal.emit(false)
+func _on_special_recovery_timeout() -> void:
+    back_pack_special_state_signal.emit(false)
 
 
 func set_player() -> void:
@@ -70,12 +64,13 @@ func get_direction() -> Vector3:
 
     return direction
 
+
 ## Incrementa la velocidad de movimiento durante x tiempo, e impide cambiar de direccion
-func dash_bost(direction: Vector3, delta: float) -> void:
-    # if Input.is_action_just_pressed(player.actions['back_pack']):
+func dash_bost(delta: float) -> void:
+    var direction := get_direction()
     if special_duration_timer.is_stopped():
         special_duration_timer.start(_special_duration)
-        special_state_signal.emit(true)
+        back_pack_special_state_signal.emit(true)
         last_direction = direction
 
     # back bost(dash)
@@ -121,3 +116,16 @@ func dash_bost(direction: Vector3, delta: float) -> void:
             0.0,
             _decelaration * delta
         )
+
+
+## Signals de timers para duracion y recovery de special
+func set_timers_signals() -> void:
+    special_duration_timer.connect('timeout', _on_special_duration_timeout)
+
+    special_recovery_timer.connect('timeout', _on_special_recovery_timeout)
+
+## activate_special(dash_bost.bind(delta))
+func activate_special(callable: Callable) -> void:
+    if Input.is_action_just_pressed(player.actions['back_pack']):
+        callable.call()
+    pass
