@@ -1,10 +1,11 @@
 extends Node3D
 class_name BackPack
 
-## Back pack basic -> b_button impulso dependiendo direccion de movimiento
 
 
-# DESCRIPCION: activate_special(callable) llama a la funcion que quiero que se active, que se mantiene activo durante special_duration /segundos, 
+
+## DESCRIPCION: activate_special(callable) llama a la funcion que quiero que se active, que se mantiene activo durante special_duration /segundos, pensado asi para al heredar de esta clase solo tenga que override el _physics_process() 
+# con activate_special() deseado
 
 
 var _max_speed: float = 40.0
