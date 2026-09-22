@@ -3,8 +3,8 @@ class_name Legs
 
 
 ## DESCRIPCION :
-##
-##
+## _physics_process() contiene move(), jump(),
+## air_jump(), recharge_cool_down(), son las acciones basicas 
 
 # FUNCIONAMIENTO:
     #
