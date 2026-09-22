@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BackPackStats" format=3 uid="uid://whrufuxoq3n8"]
 
-[ext_resource type="Script" uid="uid://dw7kf54ny4vgf" path="res://gameplay/mech_addons/resources/back_pack_resource.gd" id="1_s7hrt"]
+[ext_resource type="Script" uid="uid://dw7kf54ny4vgf" path="res://gameplay/mech_addons/resources/back_pack/back_pack_resource.gd" id="1_s7hrt"]
 
 [resource]
 script = ExtResource("1_s7hrt")

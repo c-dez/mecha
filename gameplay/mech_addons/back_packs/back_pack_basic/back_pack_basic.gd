@@ -13,7 +13,7 @@ class_name BackPack
     # mientras dura special esta activado
 
 
-var stats:BackPackStats
+var stats: BackPackStats
 var _max_speed: float = 40.0
 var _acceleration = 100.0
 var _decelaration: float = 100.0
@@ -46,7 +46,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
     activate_special(dash_bost.bind(delta))
 
-
+    
+    
 func _on_special_duration_timeout() -> void:
     special_recovery_timer.start(_special_recovery)
 
@@ -70,7 +71,6 @@ func set_stats() -> void:
 
     _special_duration = stats.special_duration
     _special_recovery = stats.special_recovery
-
 
 
 ## Toma player.input y regresa su direccion en Vector3
