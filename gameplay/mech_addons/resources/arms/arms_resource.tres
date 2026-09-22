@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ArmsStats" format=3 uid="uid://fcreg4y17oyn"]
+
+[ext_resource type="Script" uid="uid://c3djtj3ylh3im" path="res://gameplay/mech_addons/resources/arms/arms_resource.gd" id="1_sexgc"]
+
+[resource]
+script = ExtResource("1_sexgc")
+metadata/_custom_type_script = "uid://c3djtj3ylh3im"
