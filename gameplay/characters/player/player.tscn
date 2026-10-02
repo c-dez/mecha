@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://ds8og5vvjvr3m" path="res://gameplay/characters/player/scripts/health.gd" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://dg5jlouc20yfn" path="res://gameplay/mech_addons/back_packs/back_pack_basic/back_pack_basic.tscn" id="6_1fpwa"]
 [ext_resource type="PackedScene" uid="uid://bx32u4wfdojdn" path="res://gameplay/mech_addons/legs/legs_basic/legs.tscn" id="8_t5n0w"]
+[ext_resource type="Script" uid="uid://nx2mvr6xnrqr" path="res://gameplay/characters/player/actions/A_button/a_button.gd" id="10_d7yn3"]
+[ext_resource type="Script" uid="uid://c6bbb68ai17gl" path="res://gameplay/characters/player/actions/actions.gd" id="10_guyw6"]
+[ext_resource type="Script" uid="uid://biouo7rgevx06" path="res://gameplay/characters/player/actions/X_button/x_button.gd" id="11_guyw6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uhly"]
 
@@ -64,8 +67,35 @@ debug_color = Color(0.17453307, 0.64097255, 0.17136633, 0.41960785)
 [node name="Addons" type="Node3D" parent="." unique_id=1924213542]
 metadata/_edit_lock_ = true
 
-[node name="Arms" type="Node3D" parent="Addons" unique_id=494204504]
+[node name="MachineGun" type="Node3D" parent="Addons" unique_id=494204504]
 
 [node name="BackPack" parent="Addons" unique_id=140502472 instance=ExtResource("6_1fpwa")]
 
 [node name="LegsBasic" parent="Addons" unique_id=1921372647 instance=ExtResource("8_t5n0w")]
+
+[node name="Head" type="Node3D" parent="Addons" unique_id=1861197701]
+
+[node name="Actions" type="Node" parent="." unique_id=1702926878]
+script = ExtResource("10_guyw6")
+
+[node name="A_Button" type="Node" parent="Actions" unique_id=886672531]
+script = ExtResource("10_d7yn3")
+
+[node name="B_Button" type="Node" parent="Actions" unique_id=347263367]
+
+[node name="X_Button" type="Node" parent="Actions" unique_id=1036982554]
+unique_name_in_owner = true
+script = ExtResource("11_guyw6")
+
+[node name="Y_Button" type="Node" parent="Actions" unique_id=1301861062]
+
+[node name="R2_Button" type="Node" parent="Actions" unique_id=1566974582]
+
+[node name="StartUp" type="Timer" parent="Actions" unique_id=1805152725]
+one_shot = true
+
+[node name="Active" type="Timer" parent="Actions" unique_id=181443816]
+one_shot = true
+
+[node name="Recovery" type="Timer" parent="Actions" unique_id=1959426614]
+one_shot = true
